@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GymLog — Tu diario de entrenamiento</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">
+      <span class="logo-icon">💪</span>
+      <span class="logo-text">GymLog</span>
+    </div>
+
+    <nav class="nav">
+      <button class="nav-btn active" data-view="today">
+        <span class="nav-icon">🔥</span><span>Hoy</span>
+      </button>
+      <button class="nav-btn" data-view="history">
+        <span class="nav-icon">📅</span><span>Historial</span>
+      </button>
+      <button class="nav-btn" data-view="exercises">
+        <span class="nav-icon">🏋️</span><span>Ejercicios</span>
+      </button>
+      <button class="nav-btn" data-view="stats">
+        <span class="nav-icon">📊</span><span>Stats</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-date">
+      <div class="date-label">Sesión activa</div>
+      <div class="date-value" id="sidebarDate"></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ===== VIEW: TODAY ===== -->
+    <section class="view active" id="view-today">
+      <header class="page-header">
+        <div>
+          <h1 class="page-title">Entrenamiento de hoy</h1>
+          <p class="page-sub" id="todayDateLabel"></p>
+        </div>
+        <button class="btn-primary" id="btnAddExercise">+ Añadir ejercicio</button>
+      </header>
+
+      <div id="todayEmpty" class="empty-state">
+        <div class="empty-icon">🏃</div>
+        <p>Aún no has registrado ejercicios hoy.<br>¡Empieza tu sesión!</p>
+      </div>
+
+      <div id="todayList" class="exercise-list"></div>
+    </section>
+
+    <!-- ===== VIEW: HISTORY ===== -->
+    <section class="view" id="view-history">
+      <header class="page-header">
+        <div>
+          <h1 class="page-title">Historial</h1>
+          <p class="page-sub">Todas tus sesiones anteriores</p>
+        </div>
+      </header>
+
+      <div id="historyEmpty" class="empty-state">
+        <div class="empty-icon">📭</div>
+        <p>No hay sesiones registradas aún.</p>
+      </div>
+
+      <div id="historyList" class="history-list"></div>
+    </section>
+
+    <!-- ===== VIEW: EXERCISES ===== -->
+    <section class="view" id="view-exercises">
+      <header class="page-header">
+        <div>
+          <h1 class="page-title">Biblioteca de ejercicios</h1>
+          <p class="page-sub">Gestiona tu lista de ejercicios</p>
+        </div>
+        <button class="btn-primary" id="btnAddCustomExercise">+ Nuevo ejercicio</button>
+      </header>
+
+      <div class="exercise-grid" id="exerciseGrid"></div>
+    </section>
+
+    <!-- ===== VIEW: STATS ===== -->
+    <section class="view" id="view-stats">
+      <header class="page-header">
+        <div>
+          <h1 class="page-title">Estadísticas</h1>
+          <p class="page-sub">Tu progreso de un vistazo</p>
+        </div>
+      </header>
+      <div class="stats-grid" id="statsGrid"></div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: Añadir / editar ejercicio del día -->
+  <div class="modal-overlay" id="modalAddExercise">
+    <div class="modal">
+      <button class="modal-close" id="closeModalAdd">✕</button>
+      <h2 class="modal-title">Registrar ejercicio</h2>
+
+      <div class="form-group">
+        <label>Ejercicio</label>
+        <select id="selectExercise"></select>
+      </div>
+
+      <div class="sets-container" id="setsContainer"></div>
+
+      <button class="btn-ghost" id="btnAddSet">+ Añadir serie</button>
+
+      <div class="modal-actions">
+        <button class="btn-secondary" id="cancelModalAdd">Cancelar</button>
+        <button class="btn-primary" id="saveExercise">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Nuevo ejercicio personalizado -->
+  <div class="modal-overlay" id="modalNewExercise">
+    <div class="modal">
+      <button class="modal-close" id="closeModalNew">✕</button>
+      <h2 class="modal-title">Nuevo ejercicio</h2>
+
+      <div class="form-group">
+        <label>Nombre del ejercicio</label>
+        <input type="text" id="newExerciseName" placeholder="Ej: Press de banca">
+      </div>
+      <div class="form-group">
+        <label>Grupo muscular</label>
+        <select id="newExerciseMuscle">
+          <option value="Pecho">Pecho</option>
+          <option value="Espalda">Espalda</option>
+          <option value="Piernas">Piernas</option>
+          <option value="Hombros">Hombros</option>
+          <option value="Bíceps">Bíceps</option>
+          <option value="Tríceps">Tríceps</option>
+          <option value="Core">Core</option>
+          <option value="Cardio">Cardio</option>
+          <option value="Full Body">Full Body</option>
+        </select>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-secondary" id="cancelModalNew">Cancelar</button>
+        <button class="btn-primary" id="saveNewExercise">Crear</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
